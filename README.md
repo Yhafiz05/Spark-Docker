@@ -1,7 +1,10 @@
+# Running Spark using Docker compose
+
 Le principe du projet est de pouvoir faire tourner Spark sur un petit cluster constitué de quelque containers docker dans lesquels on aurait un master qui va coordonnée les noeuds worker.
 
-## Spark
 ---
+# Spark
+
 Spark est un framework open source qui permet de faire de l'analyse de données massives. C'est une solution beaucoup plus moderne que d'autre solutions comme **Hadoop MapReduce**.
 
 ---
@@ -20,6 +23,9 @@ Spark est un framework open source qui permet de faire de l'analyse de données 
 - **Worker** : exécute les tâches qui lui sont transmises via un executor et transmet le résultat au master.
 
 ```mermaid
+---
+title: "Architecture Spark"
+---
 graph TD
     A["Spark Driver (Master)"] --> B["Cluster Manager (YARN / Mesos / Standalone)"]
     B --> W1["Worker Node 1"]
@@ -49,4 +55,19 @@ graph TD
 
 ```
 
+---
+
+# Docker
+
+Docker est une plateforme de conteneurisation permettant de créer, déployer et exécuter des applications dans des environnements isolés appelés **conteneurs**. Chaque conteneur embarque tout le nécessaire pour exécuter l’application : code, bibliothèques, dépendances et configuration. Cela garantit un comportement identique, quel que soit l’environnement d’exécution.  
+
+---
+## Pourquoi utiliser Docker pour Spark
+
+Pour un projet Spark, Docker présente plusieurs avantages :
+- **Isolation** : chaque conteneur fonctionne indépendamment, ce qui évite les conflits de dépendances.
+- **Portabilité** : le cluster Spark fonctionne de la même façon sur n’importe quelle machine.
+- **Reproductibilité** : l’environnement est défini par un fichier (`docker-compose.yml`) garantissant que tout le monde utilise la même configuration.
+- **Scalabilité** : possibilité de monter ou descendre le nombre de workers facilement avec **docker-compose up --scale**
+- **Facilité de déploiement** : Docker Compose orchestre plusieurs conteneurs (maître + workers) via un seul fichier de configuration.
 ---
