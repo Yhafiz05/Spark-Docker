@@ -61,13 +61,30 @@ graph TD
 
 Docker est une plateforme de conteneurisation permettant de créer, déployer et exécuter des applications dans des environnements isolés appelés **conteneurs**. Chaque conteneur embarque tout le nécessaire pour exécuter l’application : code, bibliothèques, dépendances et configuration. Cela garantit un comportement identique, quel que soit l’environnement d’exécution.  
 
----
 ## Pourquoi utiliser Docker pour Spark
 
 Pour un projet Spark, Docker présente plusieurs avantages :
 - **Isolation** : chaque conteneur fonctionne indépendamment, ce qui évite les conflits de dépendances.
 - **Portabilité** : le cluster Spark fonctionne de la même façon sur n’importe quelle machine.
 - **Reproductibilité** : l’environnement est défini par un fichier (`docker-compose.yml`) garantissant que tout le monde utilise la même configuration.
-- **Scalabilité** : possibilité de monter ou descendre le nombre de workers facilement avec **docker-compose up --scale**
+- **Scalabilité** : possibilité de monter ou descendre le nombre de workers facilement avec *docker-compose up --scale*.
 - **Facilité de déploiement** : Docker Compose orchestre plusieurs conteneurs (maître + workers) via un seul fichier de configuration.
----
+## Pourquoi docker compose
+
+Docker compose est un outil pour définir une application multi container. C'est un outil beaucoup utilisé de nos jours pour un déploiement efficace et rapide.
+
+**Compose** simplifie le contrôle de toute l'architecture, rendant facile la gestion des services, réseaux et volumes dockers en un seul fichier sous format **YAML**.
+
+En juste quelques commande il est possible de déployer, de stopper , et de scaler une architecture :
+- **docker compose up** : déploie l'architecture.
+- **docker compose down** : Stop toute une architecture.
+- **docker-compose up --scale worker=5**: Pour scaler à 5 container le service master. Il est aussi possible de définir dans le **docker-compose.yml** une variable **replicas**.
+
+```yaml title="Docker-compose avec replicas"
+service:
+	cache:
+		image: redis:latest
+		deploy:
+		replicas: 2
+```
+
