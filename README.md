@@ -82,9 +82,9 @@ En juste quelques commande il est possible de déployer, de stopper , et de scal
 
 ```yaml title="Docker-compose avec replicas"
 service:
-	cache:
-		image: redis:latest
-		deploy:
-		replicas: 2
+  cache:
+	image: redis:latest
+	deploy:
+	replicas: 2
 ```
 
