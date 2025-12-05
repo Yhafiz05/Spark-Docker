@@ -29,15 +29,19 @@ services:
       - spark-master
 
   jupyter:
-    image: jupyter/pyspark-notebook
+    build:
+      context: ./jupyter
+      dockerfile: Dockerfile
     container_name: spark-notebook
     ports:
       - "8888:8888"
     environment:
+      - PYSPARK_PYTHON=python3
       - PYSPARK_MASTER=spark://spark-master:7077
-    networks:
-      - spark-net
     depends_on:
       - spark-master
+    networks:
+      - spark-net
+
 networks:
   spark-net:
