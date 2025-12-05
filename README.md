@@ -100,3 +100,28 @@ replicas: 2
 Pour nous simplifier la tâche, nous n'utiliserons pas de Cluster Manager. Ce qui se traduit par un container **driver** et N containers **worker**s car spark utilise son propre gestionnaire de cluster intégré.
 
 [docker-compose file](src/docker-compose.yml)
+
+## Utilisation
+
+Déplacez-vous dans le repertoire source et lancer docker-compose :
+
+```bash
+cd src/
+docker-compose up -d
+```
+
+L'interface du master sera disponible à l'adresse : http://localhost:8888.
+A cette étape il sera désormais possible de visualiser le nombre de worker connecté et leur exécution via l'interface web.
+Pour les scaler au nombre voulu :
+
+```bash
+docker compose up -d --scale spark-worker=$nb
+```
+
+Afin de rendre le tout interactif, un container avec un notebook jupyter a été crée puis connecté au master pour le lancement des jobs :
+
+```bash
+docker logs spark-notebook
+```
+
+La commande ci-dessus permet d'afficher les logs de ce container qui contient a fin le lien vers le notebook sous cette forme : `http://localhost:8888/?token=xxxx`
