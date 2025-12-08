@@ -1,5 +1,8 @@
 # Running Spark using Docker compose
 
+---
+
+![spark-image](apache.webp)
 Le principe du projet est de pouvoir faire tourner Spark sur un petit cluster constitué de quelque containers docker dans lesquels on aurait un master qui va coordonnée les noeuds worker.
 
 ---
@@ -103,25 +106,37 @@ Pour nous simplifier la tâche, nous n'utiliserons pas de Cluster Manager. Ce qu
 
 ## Utilisation
 
+La mise en route peut prendre un certain temps due à la construction des images.  
 Déplacez-vous dans le repertoire source et lancer docker-compose :
 
 ```bash
-cd src/
-docker-compose up -d
+make up
 ```
 
-L'interface du master sera disponible à l'adresse : http://localhost:8888.
+L'interface du master sera disponible à l'adresse : http://localhost:8080.
 A cette étape il sera désormais possible de visualiser le nombre de worker connecté et leur exécution via l'interface web.
 Pour les scaler au nombre voulu :
 
 ```bash
-docker compose up -d --scale spark-worker=$nb
+make scale N=3
 ```
 
-Afin de rendre le tout interactif, un container avec un notebook jupyter a été crée puis connecté au master pour le lancement des jobs :
+Il existe plusieurs manières de tester le bon fonctionnement de l'architecture. Dans notre cas, nous allons utiliser pySpark en nous connectant au noeud master.
+
+- Lancer jupyter depuis le noeud master:
 
 ```bash
-docker logs spark-notebook
+docker exec -it spark-master jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root --notebook-dir=/opt/spark/scripts
 ```
 
-La commande ci-dessus permet d'afficher les logs de ce container qui contient a fin le lien vers le notebook sous cette forme : `http://localhost:8888/?token=xxxx`
+Pour consulter l'activité des workers http://localhost:18080.
+
+N'oubliez pas de faire de l'espace en supprimant les images créees:
+
+```bash
+docker images
+```
+
+```bash
+docker rmi {id_image}
+```
