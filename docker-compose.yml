@@ -18,7 +18,7 @@ services:
       - ./scripts:/opt/spark/scripts
       - ./data:/opt/spark/data
       - ./spark-logs:/opt/spark/spark-events
-      - ./warehouse:/
+      - ./warehouse:/opt/spark/warehouse
     networks:
       - spark-net
   spark-history-server:
@@ -33,7 +33,7 @@ services:
       - ./scripts:/opt/spark/scripts
       - ./data:/opt/spark/data
       - ./spark-logs:/opt/spark/spark-events
-      - ./warehouse:/
+      - ./warehouse:/opt/spark/warehouse
     ports:
       - "18080:18080"
     networks:

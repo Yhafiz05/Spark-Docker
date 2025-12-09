@@ -1,10 +1,10 @@
 .PHONY: up down dev scale clean
 
 up:
-	docker-compose up -d
+	docker compose up -d
 
 down:
-	docker-compose down
+	docker compose down
 	rm -rf data/output
 
 dev:
@@ -15,4 +15,4 @@ scale:
 ifndef N
 	$(error N is not set. Example: make scale N=2)
 endif
-	docker-compose up -d --scale spark-worker=$(N)
+	docker compose up -d --scale spark-worker=$(N)
