@@ -1,6 +1,7 @@
 services:
   spark-master:
     build: .
+    image: mon-image-spark:latest
     container_name: spark-master
     entrypoint: ["./entrypoint.sh", "master"]
     healthcheck:
@@ -23,7 +24,7 @@ services:
       - spark-net
   spark-history-server:
     container_name: spark-history
-    build: .
+    image: mon-image-spark:latest
     entrypoint: ["./entrypoint.sh", "history"]
     depends_on:
       - spark-master
@@ -39,7 +40,7 @@ services:
     networks:
       - spark-net
   spark-worker:
-    build: .
+    image: mon-image-spark:latest
     entrypoint: ["./entrypoint.sh", "worker"]
     depends_on:
       - spark-master
