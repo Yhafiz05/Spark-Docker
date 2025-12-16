@@ -77,8 +77,9 @@ RUN curl https://repo1.maven.org/maven2/io/delta/delta-storage/3.2.0/delta-stora
 # hudi
 RUN curl https://repo1.maven.org/maven2/org/apache/hudi/hudi-spark3-bundle_2.12/0.15.0/hudi-spark3-bundle_2.12-0.15.0.jar -Lo /opt/spark/jars/hudi-spark3-bundle_2.12-0.15.0.jar
 
+WORKDIR /opt/spark
 COPY entrypoint.sh .
-RUN chmod u+x /opt/spark/entrypoint.sh
+RUN chmod u+x ./entrypoint.sh
 
 ENTRYPOINT ["./entrypoint.sh"]
 CMD [ "bash" ]
