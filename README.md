@@ -102,7 +102,7 @@ replicas: 2
 
 Pour nous simplifier la tâche, nous n'utiliserons pas de Cluster Manager. Ce qui se traduit par un container **driver** et N containers **worker**s car spark utilise son propre gestionnaire de cluster intégré.
 
-[docker-compose file](src/docker-compose.yml)
+[docker-compose file](docker-compose.yml)
 
 ## Utilisation
 
